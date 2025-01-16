@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ReservationService implements IDAO<Reservation> {
@@ -135,4 +136,31 @@ public class ReservationService implements IDAO<Reservation> {
         }
         return null;
     }
+public boolean isChambreDisponible(int chambreId, Date dateDebut, Date dateFin) {
+    // Vérifier que la date de fin est postérieure à la date de début
+    if (dateFin.compareTo(dateDebut) <= 0) {
+        // La date de fin est antérieure ou égale à la date de début, ce qui est invalide
+        System.out.println("Erreur : La date de fin doit être postérieure à la date de début.");
+        return false;
+    }
+
+    String req = "SELECT * FROM reservation WHERE chambreId = ? AND " +
+                "(? <= dateFin AND ? >= dateDebut)";
+    try {
+        PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+        ps.setInt(1, chambreId);
+        ps.setDate(2, new java.sql.Date(dateDebut.getTime())); // dateDebut de la nouvelle réservation
+        ps.setDate(3, new java.sql.Date(dateFin.getTime()));   // dateFin de la nouvelle réservation
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            // Il y a une réservation qui chevauche la période demandée
+            return false;
+        }
+    } catch (SQLException e) {
+        System.out.println("Erreur lors de la vérification de la disponibilité de la chambre");
+        e.printStackTrace();
+    }
+    // La chambre est disponible
+    return true;
+}
 }

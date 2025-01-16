@@ -159,4 +159,34 @@ public List<Chambre> findAll() {
         String categoryName = getCategoryNameById(chambre.getCategorieId());
         return expectedCategory.equals(categoryName);
     }
+    public List<String> findAllChambresForCombobox() {
+    String req = "SELECT * FROM chambre";
+    List<String> chambres = new ArrayList<>();
+    try {
+        PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            String chambreInfo = rs.getInt("id") + " - " + rs.getInt("number") + " (" + rs.getString("type") + ")";
+            chambres.add(chambreInfo);
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException("Erreur lors de la récupération des chambres pour le combobox", e);
+    }
+    return chambres;
+}
+    public List<String> findAllAvailableChambresForCombobox() {
+    List<String> chambres = new ArrayList<>();
+    String req = "SELECT id, number FROM chambre WHERE available = true"; // Récupérer uniquement les chambres disponibles
+    try {
+        PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            chambres.add(rs.getInt("id") + " - " + rs.getString("number")); // Format : "ID - Numéro"
+        }
+    } catch (SQLException e) {
+        System.out.println("Erreur lors de la récupération des chambres disponibles");
+        e.printStackTrace();
+    }
+    return chambres;
+}
 }

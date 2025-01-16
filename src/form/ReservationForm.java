@@ -3,6 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package form;
+import com.itextpdf.text.Document;
+import entities.Chambre;
+import entities.Client;
+import java.util.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import service.ChamberService;
+import service.ClientService;
+import entities.Reservation;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import service.ReservationService;
+
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +38,58 @@ public class ReservationForm extends javax.swing.JInternalFrame {
      */
     public ReservationForm() {
         initComponents();
+        fillComboboxes();
+        refreshChambreCombo();
+        loadReservations();
     }
+    private void fillComboboxes() {
+    // Remplir le combobox des clients
+    ClientService clientService = new ClientService();
+    List<String> clients = clientService.findAllClientsForCombobox();
+    for (String client : clients) {
+        Clinetcombo.addItem(client);
+    }
+
+    // Remplir le combobox des chambres disponibles
+    ChamberService chamberService = new ChamberService();
+    List<String> chambres = chamberService.findAllAvailableChambresForCombobox(); // Utiliser la nouvelle méthode
+    for (String chambre : chambres) {
+        Chambercombo.addItem(chambre);
+    }
+}
+   private void refreshChambreCombo() {
+    Chambercombo.removeAllItems(); // Vider le combobox
+    ChamberService chamberService = new ChamberService();
+    List<String> chambres = chamberService.findAllAvailableChambresForCombobox(); // Récupérer les chambres disponibles
+
+    // Vérifier si la liste des chambres est vide
+    if (chambres.isEmpty()) {
+        System.out.println("Aucune chambre disponible.");
+        return;
+    }
+
+    // Remplir le combobox avec les chambres disponibles
+    for (String chambre : chambres) {
+        Chambercombo.addItem(chambre);
+    }
+}
+   
+    private void loadReservations() {
+        ReservationService rs = new ReservationService();
+        List<Reservation> reservations = rs.findAll();
+        DefaultTableModel model = (DefaultTableModel) ListReservation.getModel();
+        model.setRowCount(0); // Vider le tableau
+        for (Reservation r : reservations) {
+            model.addRow(new Object[]{
+                r.getId(),
+                r.getDateDebutAsString(),
+                r.getDateFinAsString(),
+                r.getChambre().getId(),
+                r.getClient().getId()
+            });
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,112 +106,154 @@ public class ReservationForm extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        reservationdateDebut = new javax.swing.JTextField();
-        reservationdateFin = new javax.swing.JTextField();
-        reservationchambre = new javax.swing.JTextField();
-        reservstionclient = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        Chambercombo = new javax.swing.JComboBox<>();
+        Clinetcombo = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ListReservation = new javax.swing.JTable();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Gestion de Reservation ");
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel1.setText("Gestion de Reservation ");
 
-        jLabel2.setText("dateDebut");
+        jLabel2.setText("dateDebut :");
 
-        jLabel3.setText("dateFin");
+        jLabel3.setText("dateFin :");
 
-        jLabel4.setText("chambre");
+        jLabel4.setText("Chambre :");
 
-        jLabel5.setText("client");
+        jLabel5.setText("Client :");
 
-        reservationdateDebut.setText("dateDebut");
-
-        reservationdateFin.setText("dateFin");
-
-        reservationchambre.setText("chambre");
-
-        reservstionclient.setText("client");
-
+        jButton1.setBackground(new java.awt.Color(158, 140, 35));
         jButton1.setText("Ajouter");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
+        jButton2.setBackground(new java.awt.Color(158, 140, 35));
         jButton2.setText("Modifier ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
+        jButton3.setBackground(new java.awt.Color(158, 140, 35));
         jButton3.setText("Supprimer ");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        Chambercombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChambercomboActionPerformed(evt);
+            }
+        });
+
+        Clinetcombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClinetcomboActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(158, 140, 35));
+        jButton4.setText("Export PDF");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(150, 150, 150)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(reservationdateDebut)
-                            .addComponent(reservationdateFin)
-                            .addComponent(reservationchambre)
-                            .addComponent(reservstionclient))))
-                .addGap(49, 49, 49))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(41, 41, 41)
-                .addComponent(jButton2)
-                .addGap(45, 45, 45)
-                .addComponent(jButton3)
-                .addGap(68, 68, 68))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(Chambercombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                    .addComponent(Clinetcombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(125, 125, 125)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(206, 206, 206))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Chambercombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(Clinetcombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(reservationdateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(reservationdateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(reservationchambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(reservstionclient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jLabel6.setText("list des reservation ");
+        jPanel2.setBackground(new java.awt.Color(151, 69, 28));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("List des reservation ");
+
+        ListReservation.setBackground(new java.awt.Color(231, 215, 150));
+        ListReservation.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -148,7 +264,12 @@ public class ReservationForm extends javax.swing.JInternalFrame {
                 "id", "DateDebut", "dateFin", "Chambre", "client"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        ListReservation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListReservationMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(ListReservation);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -159,17 +280,17 @@ public class ReservationForm extends javax.swing.JInternalFrame {
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 56, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,10 +300,8 @@ public class ReservationForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -198,11 +317,283 @@ public class ReservationForm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       // Récupérer la date de début et de fin
+    Date dateDebut = jDateChooser1.getDate();
+    Date dateFin = jDateChooser2.getDate();
+
+    // Récupérer l'ID du client sélectionné
+    Object selectedClient = Clinetcombo.getSelectedItem();
+    if (selectedClient == null) {
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner un client.");
+        return;
+    }
+    int clientId = Integer.parseInt(selectedClient.toString().split(" - ")[0]); // Extraire l'ID du client
+
+    // Récupérer l'ID de la chambre sélectionnée
+    Object selectedChambre = Chambercombo.getSelectedItem();
+    if (selectedChambre == null) {
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner une chambre.");
+        return;
+    }
+    int chambreId = Integer.parseInt(selectedChambre.toString().split(" - ")[0]); // Extraire l'ID de la chambre
+
+    // Vérifier si la chambre est disponible pour la période demandée
+    ReservationService rs = new ReservationService();
+    if (!rs.isChambreDisponible(chambreId, dateDebut, dateFin)) {
+        JOptionPane.showMessageDialog(this, "La chambre n'est pas disponible pendant cette période.");
+        return;
+    }
+
+    // Créer une nouvelle réservation
+    Reservation reservation = new Reservation(dateDebut, dateFin, new Chambre(chambreId), new Client(clientId));
+
+    // Ajouter la réservation via le service
+    if (rs.create(reservation)) {
+        JOptionPane.showMessageDialog(this, "Réservation créée avec succès");
+        loadReservations(); // Recharger la liste des réservations
+    } else {
+        JOptionPane.showMessageDialog(this, "Échec de la création de la réservation");
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Récupérer la ligne sélectionnée dans le tableau
+    int selectedRow = ListReservation.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner une réservation à modifier.");
+        return;
+    }
+
+    // Récupérer l'ID de la réservation sélectionnée
+    int reservationId = (int) ListReservation.getValueAt(selectedRow, 0);
+
+    // Récupérer les nouvelles informations du formulaire
+    Date dateDebut = jDateChooser1.getDate();
+    Date dateFin = jDateChooser2.getDate();
+    String selectedClient = Clinetcombo.getSelectedItem().toString();
+    int clientId = Integer.parseInt(selectedClient.split(" - ")[0]); // Extraire l'ID du client
+    String selectedChambre = Chambercombo.getSelectedItem().toString();
+    int chambreId = Integer.parseInt(selectedChambre.split(" - ")[0]); // Extraire l'ID de la chambre
+
+    // Récupérer la réservation existante
+    ReservationService rs = new ReservationService();
+    Reservation reservation = rs.findById(reservationId);
+
+    if (reservation == null) {
+        JOptionPane.showMessageDialog(this, "Réservation introuvable.");
+        return;
+    }
+
+    // Vérifier si la chambre est disponible pour la nouvelle période
+    if (!rs.isChambreDisponible(chambreId, dateDebut, dateFin) && chambreId != reservation.getChambre().getId()) {
+        JOptionPane.showMessageDialog(this, "La chambre n'est pas disponible pendant cette période.");
+        return;
+    }
+
+    // Mettre à jour la réservation
+    reservation.setDateDebut(dateDebut);
+    reservation.setDateFin(dateFin);
+    reservation.setChambre(new Chambre(chambreId));
+    reservation.setClient(new Client(clientId));
+
+    if (rs.update(reservation)) {
+        JOptionPane.showMessageDialog(this, "Réservation modifiée avec succès.");
+        loadReservations(); // Recharger la liste des réservations
+    } else {
+        JOptionPane.showMessageDialog(this, "Échec de la modification de la réservation.");
+    }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       // Récupérer la ligne sélectionnée dans le tableau
+    int selectedRow = ListReservation.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner une réservation à supprimer.");
+        return;
+    }
+
+    // Récupérer l'ID de la réservation sélectionnée
+    int reservationId = (int) ListReservation.getValueAt(selectedRow, 0);
+
+    // Demander une confirmation avant de supprimer
+    int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Êtes-vous sûr de vouloir supprimer cette réservation ?",
+        "Confirmation",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        // Supprimer la réservation via le service
+        ReservationService rs = new ReservationService();
+        Reservation reservation = rs.findById(reservationId);
+
+        if (reservation != null && rs.delete(reservation)) {
+            JOptionPane.showMessageDialog(this, "Réservation supprimée avec succès.");
+            loadReservations(); // Recharger la liste des réservations
+        } else {
+            JOptionPane.showMessageDialog(this, "Échec de la suppression de la réservation.");
+        }
+    }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void ClinetcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClinetcomboActionPerformed
+        // Récupérer l'ID du client sélectionné
+   String selectedItem = Clinetcombo.getSelectedItem().toString();
+    
+    // Extraire l'ID du client (le premier élément avant le séparateur "-")
+    int clientId = Integer.parseInt(selectedItem.split(" - ")[0]);
+    
+    // Vous pouvez ajouter des actions supplémentaires ici, comme afficher les détails du client
+    System.out.println("Client sélectionné : " + clientId);
+    }//GEN-LAST:event_ClinetcomboActionPerformed
+
+    private void ChambercomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChambercomboActionPerformed
+         // Récupérer l'élément sélectionné dans le combobox
+    Object selectedItem = Chambercombo.getSelectedItem();
+    
+    // Vérifier si l'élément sélectionné est null
+    if (selectedItem == null) {
+        System.out.println("Aucune chambre sélectionnée.");
+        return;
+    }
+
+    // Extraire l'ID de la chambre (le premier élément avant le séparateur "-")
+    String selectedChambre = selectedItem.toString();
+    int chambreId = Integer.parseInt(selectedChambre.split(" - ")[0]);
+    
+    // Vous pouvez ajouter des actions supplémentaires ici, comme afficher les détails de la chambre
+    System.out.println("Chambre sélectionnée : " + chambreId);
+    }//GEN-LAST:event_ChambercomboActionPerformed
+
+    private void ListReservationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListReservationMouseClicked
+     int selectedRow = ListReservation.getSelectedRow();
+    
+    // Vérifier si une ligne est bien sélectionnée
+    if (selectedRow >= 0) {
+        // Récupérer les valeurs de la ligne sélectionnée
+        int reservationId = (int) ListReservation.getValueAt(selectedRow, 0);
+        String dateDebut = (String) ListReservation.getValueAt(selectedRow, 1);
+        String dateFin = (String) ListReservation.getValueAt(selectedRow, 2);
+        int chambreId = (int) ListReservation.getValueAt(selectedRow, 3);
+        int clientId = (int) ListReservation.getValueAt(selectedRow, 4);
+
+        // Remplir les champs du formulaire
+        try {
+            // Convertir les dates String en Date
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adaptez le format à celui utilisé dans votre tableau
+            jDateChooser1.setDate(dateFormat.parse(dateDebut));
+            jDateChooser2.setDate(dateFormat.parse(dateFin));
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Erreur lors de la conversion des dates.");
+            e.printStackTrace();
+        }
+
+        // Sélectionner la chambre correspondante dans le combobox
+        for (int i = 0; i < Chambercombo.getItemCount(); i++) {
+            String item = Chambercombo.getItemAt(i);
+            if (item.startsWith(chambreId + " - ")) { // Vérifier si l'élément correspond à l'ID de la chambre
+                Chambercombo.setSelectedIndex(i);
+                break;
+            }
+        }
+
+        // Sélectionner le client correspondant dans le combobox
+        for (int i = 0; i < Clinetcombo.getItemCount(); i++) {
+            String item = Clinetcombo.getItemAt(i);
+            if (item.startsWith(clientId + " - ")) { // Vérifier si l'élément correspond à l'ID du client
+                Clinetcombo.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
+    }//GEN-LAST:event_ListReservationMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // Récupérer la ligne sélectionnée dans le tableau
+    int selectedRow = ListReservation.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner une réservation à exporter.");
+        return;
+    }
+
+    // Récupérer l'ID de la réservation sélectionnée
+    int reservationId = (int) ListReservation.getValueAt(selectedRow, 0);
+
+    // Récupérer les détails de la réservation
+    ReservationService rs = new ReservationService();
+    Reservation reservation = rs.findById(reservationId);
+
+    if (reservation == null) {
+        JOptionPane.showMessageDialog(this, "Réservation introuvable.");
+        return;
+    }
+
+    // Récupérer les détails du client
+    ClientService clientService = new ClientService();
+    Client client = clientService.findById(reservation.getClient().getId());
+
+    if (client == null) {
+        JOptionPane.showMessageDialog(this, "Client introuvable.");
+        return;
+    }
+
+    // Demander à l'utilisateur où enregistrer le fichier
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Enregistrer le fichier PDF");
+    fileChooser.setFileFilter(new FileNameExtensionFilter("Fichiers PDF (*.pdf)", "pdf"));
+    int userSelection = fileChooser.showSaveDialog(this);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+        // Ajouter l'extension .pdf si elle n'est pas présente
+        if (!filePath.toLowerCase().endsWith(".pdf")) {
+            filePath += ".pdf";
+        }
+
+        // Créer un document PDF avec iText 7
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            // Initialiser le PdfWriter et le PdfDocument
+            PdfWriter writer = new PdfWriter(fos);
+            PdfDocument pdfDoc = new PdfDocument(writer);
+            Document document = new Document(pdfDoc);
+
+            // Ajouter les détails de la réservation au PDF
+            document.add(new Paragraph("Détails de la réservation")
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setBold()
+                    .setFontSize(16));
+            document.add(new Paragraph("========================="));
+            document.add(new Paragraph("ID de la réservation : " + reservation.getId()));
+            document.add(new Paragraph("Date de début : " + reservation.getDateDebutAsString()));
+            document.add(new Paragraph("Date de fin : " + reservation.getDateFinAsString()));
+            document.add(new Paragraph("ID de la chambre : " + reservation.getChambre().getId()));
+            document.add(new Paragraph("Nom du client : " + client.getNom() + " " + client.getPrenom()));
+
+            // Fermer le document
+            document.close();
+
+            JOptionPane.showMessageDialog(this, "Fichier PDF exporté avec succès : " + filePath);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Erreur lors de l'exportation du fichier PDF : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Chambercombo;
+    private javax.swing.JComboBox<String> Clinetcombo;
+    private javax.swing.JTable ListReservation;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -212,10 +603,5 @@ public class ReservationForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField reservationchambre;
-    private javax.swing.JTextField reservationdateDebut;
-    private javax.swing.JTextField reservationdateFin;
-    private javax.swing.JTextField reservstionclient;
     // End of variables declaration//GEN-END:variables
 }

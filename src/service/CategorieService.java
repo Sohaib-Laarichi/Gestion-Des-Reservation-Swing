@@ -107,4 +107,19 @@ public class CategorieService implements IDAO<Categorie> {
         }
         return null;
     }
+    public int findIdByLibelle(String libelle) {
+    String req = "SELECT id FROM Categorie WHERE libelle = ?";
+    try {
+        PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+        ps.setString(1, libelle);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id"); // Retourne l'ID de la catégorie
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de l'ID de la catégorie", "Erreur", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
+    return -1; // Retourne -1 si la catégorie n'est pas trouvée
+}
 }

@@ -3,18 +3,51 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package form;
-
+import entities.Categorie;
+import entities.Chambre;
+import service.ChamberService;
+import service.CategorieService;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 /**
  *
  * @author Dark
  */
 public class ChambreForm extends javax.swing.JInternalFrame {
-
+private ChamberService chamberService;
+    private CategorieService categorieService;
+    private DefaultTableModel model;
+    public static int id;
     /**
      * Creates new form ChambreForm
      */
     public ChambreForm() {
         initComponents();
+        chamberService = new ChamberService();
+        categorieService = new CategorieService();
+        model = (DefaultTableModel) ListChamber.getModel();
+        chargerCategories(); // Charger les catégories dans le JComboBox
+        load(); // Charger les données au démarrage
+    }
+      private void chargerCategories() {
+        List<Categorie> categories = categorieService.findAll();
+        for (Categorie categorie : categories) {
+            jComboBoxCategorie.addItem(categorie.getLibelle());
+        }
+    }
+     public void load() {
+        model.setRowCount(0); // Vider la table
+        for (Chambre chambre : chamberService.findAll()) {
+            model.addRow(new Object[]{
+                chambre.getId(),
+                chambre.getType(),
+                chambre.isAvailable() ? "Oui" : "Non",
+                chambre.getNumber(),
+                chambre.getDescription(),
+                categorieService.findById(chambre.getCategorieId()).getLibelle() // Libellé de la catégorie
+            });
+        }
     }
 
     /**
@@ -34,56 +67,86 @@ public class ChambreForm extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         chambertype = new javax.swing.JTextField();
-        chamberAvailable = new javax.swing.JTextField();
         chamberNumber = new javax.swing.JTextField();
         ChamberDescription = new javax.swing.JTextField();
-        ChamberCategorie = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jComboBoxAvailable = new javax.swing.JComboBox<>();
+        jComboBoxCategorie = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ListChamber = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Gestion Chambre ");
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel1.setText("Gestion Chamber ");
 
-        jLabel2.setText("type");
+        jLabel2.setText("Type");
 
-        jLabel3.setText("available");
+        jLabel3.setText("Available");
 
-        jLabel4.setText("number");
+        jLabel4.setText("Number");
 
-        jLabel5.setText("description");
+        jLabel5.setText("Description");
 
-        jLabel6.setText("categorieId");
+        jLabel6.setText("CategorieId");
 
-        chambertype.setText("type");
+        chambertype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chambertypeActionPerformed(evt);
+            }
+        });
 
-        chamberAvailable.setText("Available");
-
-        chamberNumber.setText("number");
-
-        ChamberDescription.setText("desscription");
-
-        ChamberCategorie.setText("categorie");
-
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
+        jButton1.setBackground(new java.awt.Color(158, 140, 35));
         jButton1.setText("Ajouter");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 102));
+        jButton2.setBackground(new java.awt.Color(158, 140, 35));
         jButton2.setText("Modifier");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(255, 51, 51));
+        jButton3.setBackground(new java.awt.Color(158, 140, 35));
         jButton3.setText("Supprimer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jComboBoxAvailable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Oui", "Non" }));
+        jComboBoxAvailable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAvailableActionPerformed(evt);
+            }
+        });
+
+        jComboBoxCategorie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCategorieActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(158, 140, 35));
+        jButton4.setText("Vider");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,23 +171,24 @@ public class ChambreForm extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(chambertype)
-                        .addComponent(chamberAvailable)
-                        .addComponent(chamberNumber)
-                        .addComponent(ChamberDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                        .addComponent(ChamberCategorie)))
-                .addGap(26, 26, 26))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(chambertype)
+                            .addComponent(ChamberDescription)
+                            .addComponent(chamberNumber)
+                            .addComponent(jComboBoxAvailable, 0, 929, Short.MAX_VALUE)))
+                    .addComponent(jComboBoxCategorie, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(110, 110, 110))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,34 +198,34 @@ public class ChambreForm extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(chambertype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                    .addComponent(chambertype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(chamberAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(chamberNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chamberNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(ChamberDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ChamberDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(ChamberCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jComboBoxCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(153, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(151, 69, 28));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ListChamber.setBackground(new java.awt.Color(231, 215, 150));
+        ListChamber.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
             },
@@ -169,8 +233,15 @@ public class ChambreForm extends javax.swing.JInternalFrame {
                 "id", "type", "available", "number", "description", "categorie"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        ListChamber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListChamberMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(ListChamber);
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Liste des chmabers ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -184,8 +255,8 @@ public class ChambreForm extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,8 +264,8 @@ public class ChambreForm extends javax.swing.JInternalFrame {
                 .addGap(8, 8, 8)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,10 +274,10 @@ public class ChambreForm extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,22 +285,108 @@ public class ChambreForm extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void chambertypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chambertypeActionPerformed
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(this, "Le type de chambre a été modifié.");
+    }//GEN-LAST:event_chambertypeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         String type = chambertype.getText();
+        boolean available = jComboBoxAvailable.getSelectedItem().equals("Oui");
+        int number = Integer.parseInt(chamberNumber.getText());
+        String description = ChamberDescription.getText();
+        String categorieLibelle = (String) jComboBoxCategorie.getSelectedItem();
+        int categorieId = categorieService.findIdByLibelle(categorieLibelle);
+
+        Chambre chambre = new Chambre(type, available, number, description, categorieId);
+        if (chamberService.create(chambre)) {
+            JOptionPane.showMessageDialog(this, "Chambre ajoutée avec succès");
+            load(); // Recharger les données
+        } else {
+            JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout de la chambre");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ListChamberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListChamberMouseClicked
+        int row = ListChamber.getSelectedRow();
+        if (row >= 0) {
+            id = Integer.parseInt(model.getValueAt(row, 0).toString());
+            chambertype.setText(model.getValueAt(row, 1).toString());
+            jComboBoxAvailable.setSelectedItem(model.getValueAt(row, 2).toString()); // "Oui" ou "Non"
+            chamberNumber.setText(model.getValueAt(row, 3).toString());
+            ChamberDescription.setText(model.getValueAt(row, 4).toString());
+            jComboBoxCategorie.setSelectedItem(model.getValueAt(row, 5).toString()); // Libellé de la catégorie
+        }
+    }//GEN-LAST:event_ListChamberMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String type = chambertype.getText();
+        boolean available = jComboBoxAvailable.getSelectedItem().equals("Oui");
+        int number = Integer.parseInt(chamberNumber.getText());
+        String description = ChamberDescription.getText();
+        String categorieLibelle = (String) jComboBoxCategorie.getSelectedItem();
+        int categorieId = categorieService.findIdByLibelle(categorieLibelle);
+
+        Chambre chambre = new Chambre(id, type, available, number, description, categorieId);
+        if (chamberService.update(chambre)) {
+            JOptionPane.showMessageDialog(this, "Chambre modifiée avec succès");
+            load(); // Recharger les données
+        } else {
+            JOptionPane.showMessageDialog(this, "Erreur lors de la modification de la chambre");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+          int reponse = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer cette chambre ?");
+        if (reponse == JOptionPane.YES_OPTION) {
+            Chambre chambre = new Chambre(id);
+            if (chamberService.delete(chambre)) {
+                JOptionPane.showMessageDialog(this, "Chambre supprimée avec succès");
+                load(); // Recharger les données
+            } else {
+                JOptionPane.showMessageDialog(this, "Erreur lors de la suppression de la chambre");
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBoxAvailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAvailableActionPerformed
+               // Exemple : Afficher un message lorsque la sélection dans le JComboBox est modifiée
+    String selectedItem = (String) jComboBoxAvailable.getSelectedItem();
+    //JOptionPane.showMessageDialog(this, "Vous avez sélectionné : " + selectedItem);
+    }//GEN-LAST:event_jComboBoxAvailableActionPerformed
+
+    private void jComboBoxCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategorieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCategorieActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       chambertype.setText(""); // Vider le champ "Type"
+    chamberNumber.setText(""); // Vider le champ "Number"
+    ChamberDescription.setText(""); // Vider le champ "Description"
+
+    // Réinitialiser les JComboBox
+    jComboBoxAvailable.setSelectedIndex(0); // Réinitialiser "Available" à la première option
+    jComboBoxCategorie.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ChamberCategorie;
     private javax.swing.JTextField ChamberDescription;
-    private javax.swing.JTextField chamberAvailable;
+    private javax.swing.JTable ListChamber;
     private javax.swing.JTextField chamberNumber;
     private javax.swing.JTextField chambertype;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBoxAvailable;
+    private javax.swing.JComboBox<String> jComboBoxCategorie;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -240,6 +397,5 @@ public class ChambreForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

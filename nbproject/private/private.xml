@@ -3,17 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/form/Authentification.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/form/RechercheChamber.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/entities/Chambre.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/service/ClientService.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/form/RechercheCategorieForm.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/service/ChamberService.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/form/Main.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/entities/Categorie.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/form/ClientForm.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/form/RechercheReservationForm.java</file>
-            <file>file:/C:/Users/Dark/Documents/NetBeansProjects/gestion%20de%20reservation/src/service/CategorieService.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/CatgoriForm.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/ChambreForm.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/Main.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/connexion/Connexion.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/RechercheChamber.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/ReservationForm.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/service/ChamberService.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/entities/Categorie.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/RechercheReservationForm.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/Authentification.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/entities/Chambre.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/RechercheCategorieForm.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/service/CategorieService.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/ClientForm.java</file>
+            <file>file:/C:/Users/Dark/Desktop/4iir/java/gestion%20de%20reservation/src/form/RechercheClinetForm.java</file>
         </group>
     </open-files>
 </project-private>

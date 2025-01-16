@@ -98,4 +98,19 @@ public class ClientService implements IDAO<Client> {
         }
         return clients;
     }
+    public List<String> findAllClientsForCombobox() {
+    String req = "SELECT * FROM Client";
+    List<String> clients = new ArrayList<>();
+    try {
+        PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            String clientInfo = rs.getInt("id") + " - " + rs.getString("nom") + " " + rs.getString("prenom");
+            clients.add(clientInfo);
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException("Erreur lors de la récupération des clients pour le combobox", e);
+    }
+    return clients;
+}
 }
