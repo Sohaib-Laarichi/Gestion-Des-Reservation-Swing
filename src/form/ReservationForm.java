@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package form;
-import com.itextpdf.text.Document;
 import entities.Chambre;
 import entities.Client;
 import java.util.Date;
@@ -12,16 +11,14 @@ import javax.swing.table.DefaultTableModel;
 import service.ChamberService;
 import service.ClientService;
 import entities.Reservation;
+import java.io.BufferedWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import service.ReservationService;
 
 
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.property.TextAlignment;
-import java.io.FileOutputStream;
+
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -172,7 +169,7 @@ public class ReservationForm extends javax.swing.JInternalFrame {
         });
 
         jButton4.setBackground(new java.awt.Color(158, 140, 35));
-        jButton4.setText("Export PDF");
+        jButton4.setText("Export Txt");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -541,43 +538,31 @@ public class ReservationForm extends javax.swing.JInternalFrame {
 
     // Demander à l'utilisateur où enregistrer le fichier
     JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setDialogTitle("Enregistrer le fichier PDF");
-    fileChooser.setFileFilter(new FileNameExtensionFilter("Fichiers PDF (*.pdf)", "pdf"));
+    fileChooser.setDialogTitle("Enregistrer le fichier texte");
+    fileChooser.setFileFilter(new FileNameExtensionFilter("Fichiers texte (*.txt)", "txt"));
     int userSelection = fileChooser.showSaveDialog(this);
 
     if (userSelection == JFileChooser.APPROVE_OPTION) {
         String filePath = fileChooser.getSelectedFile().getAbsolutePath();
 
-        // Ajouter l'extension .pdf si elle n'est pas présente
-        if (!filePath.toLowerCase().endsWith(".pdf")) {
-            filePath += ".pdf";
+        // Ajouter l'extension .txt si elle n'est pas présente
+        if (!filePath.toLowerCase().endsWith(".txt")) {
+            filePath += ".txt";
         }
 
-        // Créer un document PDF avec iText 7
-        try (FileOutputStream fos = new FileOutputStream(filePath)) {
-            // Initialiser le PdfWriter et le PdfDocument
-            PdfWriter writer = new PdfWriter(fos);
-            PdfDocument pdfDoc = new PdfDocument(writer);
-            Document document = new Document(pdfDoc);
+        // Écrire les détails de la réservation dans un fichier texte
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Détails de la réservation\n");
+            writer.write("=========================\n");
+            writer.write("ID de la réservation : " + reservation.getId() + "\n");
+            writer.write("Date de début : " + reservation.getDateDebutAsString() + "\n");
+            writer.write("Date de fin : " + reservation.getDateFinAsString() + "\n");
+            writer.write("ID de la chambre : " + reservation.getChambre().getId() + "\n");
+            writer.write("Nom du client : " + client.getNom() + " " + client.getPrenom() + "\n");
 
-            // Ajouter les détails de la réservation au PDF
-            document.add(new Paragraph("Détails de la réservation")
-                    .setTextAlignment(TextAlignment.CENTER)
-                    .setBold()
-                    .setFontSize(16));
-            document.add(new Paragraph("========================="));
-            document.add(new Paragraph("ID de la réservation : " + reservation.getId()));
-            document.add(new Paragraph("Date de début : " + reservation.getDateDebutAsString()));
-            document.add(new Paragraph("Date de fin : " + reservation.getDateFinAsString()));
-            document.add(new Paragraph("ID de la chambre : " + reservation.getChambre().getId()));
-            document.add(new Paragraph("Nom du client : " + client.getNom() + " " + client.getPrenom()));
-
-            // Fermer le document
-            document.close();
-
-            JOptionPane.showMessageDialog(this, "Fichier PDF exporté avec succès : " + filePath);
+            JOptionPane.showMessageDialog(this, "Fichier texte exporté avec succès : " + filePath);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Erreur lors de l'exportation du fichier PDF : " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erreur lors de l'exportation du fichier texte : " + e.getMessage());
             e.printStackTrace();
         }
     }

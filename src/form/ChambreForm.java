@@ -294,7 +294,7 @@ private ChamberService chamberService;
 
     private void chambertypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chambertypeActionPerformed
         // TODO add your handling code here:
-         JOptionPane.showMessageDialog(this, "Le type de chambre a été modifié.");
+        // JOptionPane.showMessageDialog(this, "Le type de chambre a été modifié.");
     }//GEN-LAST:event_chambertypeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -316,14 +316,17 @@ private ChamberService chamberService;
 
     private void ListChamberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListChamberMouseClicked
         int row = ListChamber.getSelectedRow();
-        if (row >= 0) {
-            id = Integer.parseInt(model.getValueAt(row, 0).toString());
-            chambertype.setText(model.getValueAt(row, 1).toString());
-            jComboBoxAvailable.setSelectedItem(model.getValueAt(row, 2).toString()); // "Oui" ou "Non"
-            chamberNumber.setText(model.getValueAt(row, 3).toString());
-            ChamberDescription.setText(model.getValueAt(row, 4).toString());
-            jComboBoxCategorie.setSelectedItem(model.getValueAt(row, 5).toString()); // Libellé de la catégorie
-        }
+    if (row >= 0) {
+        id = Integer.parseInt(model.getValueAt(row, 0).toString());
+        chambertype.setText(model.getValueAt(row, 1).toString());
+        jComboBoxAvailable.setSelectedItem(model.getValueAt(row, 2).toString()); // "Oui" ou "Non"
+        chamberNumber.setText(model.getValueAt(row, 3).toString());
+        ChamberDescription.setText(model.getValueAt(row, 4).toString());
+        jComboBoxCategorie.setSelectedItem(model.getValueAt(row, 5).toString()); // Libellé de la catégorie
+    }
+
+    // Commenter ou supprimer cette ligne
+    // JOptionPane.showMessageDialog(this, "Ligne sélectionnée : " + row);
     }//GEN-LAST:event_ListChamberMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -358,7 +361,7 @@ private ChamberService chamberService;
 
     private void jComboBoxAvailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAvailableActionPerformed
                // Exemple : Afficher un message lorsque la sélection dans le JComboBox est modifiée
-    String selectedItem = (String) jComboBoxAvailable.getSelectedItem();
+   // String selectedItem = (String) jComboBoxAvailable.getSelectedItem();
     //JOptionPane.showMessageDialog(this, "Vous avez sélectionné : " + selectedItem);
     }//GEN-LAST:event_jComboBoxAvailableActionPerformed
 

@@ -78,9 +78,9 @@ public class CategorieService implements IDAO<Categorie> {
                     rs.getString("code")
                 ));
             }
-            JOptionPane.showMessageDialog(null, "Liste des catégories récupérée avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
+           // JOptionPane.showMessageDialog(null, "Liste des catégories récupérée avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de la liste des catégories", "Erreur", JOptionPane.ERROR_MESSAGE);
+           // JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de la liste des catégories", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
         return categories;
     }
@@ -97,13 +97,13 @@ public class CategorieService implements IDAO<Categorie> {
                     rs.getString("libelle"),
                     rs.getString("code")
                 );
-                JOptionPane.showMessageDialog(null, "Catégorie trouvée :\nID: " + id + "\nLibelle: " + categorie.getLibelle() + "\nCode: " + categorie.getCode(), "Succès", JOptionPane.INFORMATION_MESSAGE);
+               // JOptionPane.showMessageDialog(null, "Catégorie trouvée :\nID: " + id + "\nLibelle: " + categorie.getLibelle() + "\nCode: " + categorie.getCode(), "Succès", JOptionPane.INFORMATION_MESSAGE);
                 return categorie;
             } else {
-                JOptionPane.showMessageDialog(null, "Aucune catégorie trouvée avec l'ID: " + id, "Information", JOptionPane.WARNING_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Aucune catégorie trouvée avec l'ID: " + id, "Information", JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erreur lors de la recherche de la catégorie", "Erreur", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erreur lors de la recherche de la catégorie", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
         return null;
     }
@@ -117,7 +117,7 @@ public class CategorieService implements IDAO<Categorie> {
             return rs.getInt("id"); // Retourne l'ID de la catégorie
         }
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de l'ID de la catégorie", "Erreur", JOptionPane.ERROR_MESSAGE);
+       // JOptionPane.showMessageDialog(null, "Erreur lors de la récupération de l'ID de la catégorie", "Erreur", JOptionPane.ERROR_MESSAGE);
         e.printStackTrace();
     }
     return -1; // Retourne -1 si la catégorie n'est pas trouvée

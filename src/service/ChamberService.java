@@ -21,12 +21,8 @@ public class ChamberService implements IDAO<Chambre> {
             ps.setInt(3, o.getNumber());
             ps.setString(4, o.getDescription());
             ps.setInt(5, o.getCategorieId());
-            if (ps.executeUpdate() == 1) {
-                System.out.println("Chambre ajoutée");
-                return true;
-            }
+            return ps.executeUpdate() == 1;
         } catch (SQLException e) {
-            System.out.println("Erreur lors de l'insert de chambre");
             e.printStackTrace();
         }
         return false;
@@ -38,13 +34,9 @@ public class ChamberService implements IDAO<Chambre> {
         try {
             PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
             ps.setInt(1, o.getId());
-            if (ps.executeUpdate() == 1) {
-                System.out.println("Chambre supprimée");
-                return true;
-            }
+            return ps.executeUpdate() == 1;
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la suppression de chambre");
-            return false;
+            e.printStackTrace();
         }
         return false;
     }
@@ -60,50 +52,36 @@ public class ChamberService implements IDAO<Chambre> {
             ps.setString(4, o.getDescription());
             ps.setInt(5, o.getCategorieId());
             ps.setInt(6, o.getId());
-            if (ps.executeUpdate() == 1) {
-                System.out.println("Chambre modifiée");
-                return true;
-            }
+            return ps.executeUpdate() == 1;
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la modification de chambre");
             e.printStackTrace();
         }
         return false;
     }
 
     @Override
-
-public List<Chambre> findAll() {
-    String req = "select * from chambre";
-    List<Chambre> chambres = new ArrayList<>();
-    try {
-        PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Chambre chambre = new Chambre(
-                rs.getInt("id"),
-                rs.getString("type"),
-                rs.getBoolean("available"),
-                rs.getInt("number"),
-                rs.getString("description"),
-                rs.getInt("categorieId")
-            );
-            chambres.add(chambre);
-            System.out.println("Chambre ID: " + chambre.getId());
-            System.out.println("Type: " + chambre.getType());
-            System.out.println("Available: " + chambre.isAvailable());
-            System.out.println("Number: " + chambre.getNumber());
-            System.out.println("Description: " + chambre.getDescription());
-            System.out.println("Categorie ID: " + chambre.getCategorieId());
-            System.out.println("---------------------------");
+    public List<Chambre> findAll() {
+        String req = "select * from chambre";
+        List<Chambre> chambres = new ArrayList<>();
+        try {
+            PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Chambre chambre = new Chambre(
+                    rs.getInt("id"),
+                    rs.getString("type"),
+                    rs.getBoolean("available"),
+                    rs.getInt("number"),
+                    rs.getString("description"),
+                    rs.getInt("categorieId")
+                );
+                chambres.add(chambre);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la récupération des chambres");
-        e.printStackTrace();
+        return chambres;
     }
-    return chambres;
-}
-
 
     @Override
     public Chambre findById(int id) {
@@ -113,7 +91,7 @@ public List<Chambre> findAll() {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Chambre chambre = new Chambre(
+                return new Chambre(
                     rs.getInt("id"),
                     rs.getString("type"),
                     rs.getBoolean("available"),
@@ -121,19 +99,8 @@ public List<Chambre> findAll() {
                     rs.getString("description"),
                     rs.getInt("categorieId")
                 );
-                System.out.println("Chambre trouvée: ");
-                System.out.println("ID: " + chambre.getId());
-                System.out.println("Type: " + chambre.getType());
-                System.out.println("Available: " + chambre.isAvailable());
-                System.out.println("Number: " + chambre.getNumber());
-                System.out.println("Description: " + chambre.getDescription());
-                System.out.println("Categorie ID: " + chambre.getCategorieId());
-                return chambre;
-            } else {
-                System.out.println("Chambre non trouvée");
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la récupération de la chambre");
             e.printStackTrace();
         }
         return null;
@@ -149,7 +116,6 @@ public List<Chambre> findAll() {
                 return rs.getString("name");
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la récupération de la catégorie");
             e.printStackTrace();
         }
         return null;
@@ -159,34 +125,35 @@ public List<Chambre> findAll() {
         String categoryName = getCategoryNameById(chambre.getCategorieId());
         return expectedCategory.equals(categoryName);
     }
+
     public List<String> findAllChambresForCombobox() {
-    String req = "SELECT * FROM chambre";
-    List<String> chambres = new ArrayList<>();
-    try {
-        PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            String chambreInfo = rs.getInt("id") + " - " + rs.getInt("number") + " (" + rs.getString("type") + ")";
-            chambres.add(chambreInfo);
+        String req = "SELECT * FROM chambre";
+        List<String> chambres = new ArrayList<>();
+        try {
+            PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String chambreInfo = rs.getInt("id") + " - " + rs.getInt("number") + " (" + rs.getString("type") + ")";
+                chambres.add(chambreInfo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        throw new RuntimeException("Erreur lors de la récupération des chambres pour le combobox", e);
+        return chambres;
     }
-    return chambres;
-}
+
     public List<String> findAllAvailableChambresForCombobox() {
-    List<String> chambres = new ArrayList<>();
-    String req = "SELECT id, number FROM chambre WHERE available = true"; // Récupérer uniquement les chambres disponibles
-    try {
-        PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            chambres.add(rs.getInt("id") + " - " + rs.getString("number")); // Format : "ID - Numéro"
+        List<String> chambres = new ArrayList<>();
+        String req = "SELECT id, number FROM chambre WHERE available = true";
+        try {
+            PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                chambres.add(rs.getInt("id") + " - " + rs.getString("number"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la récupération des chambres disponibles");
-        e.printStackTrace();
+        return chambres;
     }
-    return chambres;
-}
 }
