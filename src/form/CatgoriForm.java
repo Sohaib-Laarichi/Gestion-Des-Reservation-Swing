@@ -83,14 +83,14 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setBackground(new java.awt.Color(102, 102, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Gestion Gategorie ");
         setToolTipText("");
         setFocusable(false);
         setPreferredSize(new java.awt.Dimension(1310, 700));
         setVisible(true);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 165));
         jPanel1.setForeground(new java.awt.Color(255, 153, 153));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -100,7 +100,7 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Libelle :");
 
-        jButton1.setBackground(new java.awt.Color(158, 140, 35));
+        jButton1.setBackground(new java.awt.Color(0, 143, 168));
         jButton1.setText("Ajouter");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +108,7 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(158, 140, 35));
+        jButton2.setBackground(new java.awt.Color(0, 143, 168));
         jButton2.setText("Modifier");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +116,7 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(158, 140, 35));
+        jButton3.setBackground(new java.awt.Color(0, 143, 168));
         jButton3.setText("Supprimer");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +124,7 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(158, 140, 35));
+        jButton4.setBackground(new java.awt.Color(0, 143, 168));
         jButton4.setText("Vider");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +140,7 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
             }
         });
 
-        Recherbtn.setBackground(new java.awt.Color(158, 140, 35));
+        Recherbtn.setBackground(new java.awt.Color(0, 143, 168));
         Recherbtn.setText("Rechercher");
         Recherbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +148,7 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
             }
         });
 
-        Annulerbtn.setBackground(new java.awt.Color(158, 140, 35));
+        Annulerbtn.setBackground(new java.awt.Color(0, 143, 168));
         Annulerbtn.setText("Annuler");
         Annulerbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,9 +225,9 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(151, 69, 28));
+        jPanel3.setBackground(new java.awt.Color(0, 67, 78));
 
-        listCategorie.setBackground(new java.awt.Color(231, 215, 150));
+        listCategorie.setBackground(new java.awt.Color(255, 255, 165));
         listCategorie.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

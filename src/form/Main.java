@@ -54,10 +54,10 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 0));
+        jPanel1.setBackground(new java.awt.Color(231, 215, 150));
 
-        Client.setBackground(new java.awt.Color(198, 157, 69));
-        Client.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Client.setBackground(new java.awt.Color(0, 111, 130));
+        Client.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Client.setText("Client");
         Client.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,8 +65,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Reservation.setBackground(new java.awt.Color(198, 157, 69));
-        Reservation.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Reservation.setBackground(new java.awt.Color(0, 111, 130));
+        Reservation.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Reservation.setText("Reservation");
         Reservation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,8 +74,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Chamber.setBackground(new java.awt.Color(198, 157, 69));
-        Chamber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Chamber.setBackground(new java.awt.Color(0, 111, 130));
+        Chamber.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Chamber.setText("Chamber");
         Chamber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,8 +83,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Categorie.setBackground(new java.awt.Color(198, 157, 69));
-        Categorie.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Categorie.setBackground(new java.awt.Color(0, 111, 130));
+        Categorie.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Categorie.setText("Categorie");
         Categorie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +92,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Logout.setBackground(new java.awt.Color(198, 157, 69));
+        Logout.setBackground(new java.awt.Color(211, 66, 93));
         Logout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Logout.setText("Logout");
         Logout.addActionListener(new java.awt.event.ActionListener() {
@@ -107,28 +107,31 @@ public class Main extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Client, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Chamber, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Categorie, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Reservation)
-                    .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Reservation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Categorie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Chamber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Client, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Logout)
+                .addGap(73, 73, 73))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(56, 56, 56)
                 .addComponent(Client, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(39, 39, 39)
                 .addComponent(Reservation, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(40, 40, 40)
                 .addComponent(Chamber, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(Categorie, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addComponent(Logout)
+                .addGap(25, 25, 25))
         );
 
         menuBar.setToolTipText("");

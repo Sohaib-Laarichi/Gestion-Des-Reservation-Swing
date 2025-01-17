@@ -84,22 +84,22 @@ private ChamberService chamberService;
         ListChamber = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(102, 102, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Gestion Chambre ");
         setFocusable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 165));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Gestion Chamber ");
 
-        jLabel2.setText("Type");
+        jLabel2.setText("Type :");
 
-        jLabel3.setText("Available");
+        jLabel3.setText("Available :");
 
-        jLabel4.setText("Number");
+        jLabel4.setText("Number :");
 
-        jLabel5.setText("Description");
+        jLabel5.setText("Description :");
 
         jLabel6.setText("CategorieId");
 
@@ -109,7 +109,7 @@ private ChamberService chamberService;
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(158, 140, 35));
+        jButton1.setBackground(new java.awt.Color(0, 143, 168));
         jButton1.setText("Ajouter");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +117,7 @@ private ChamberService chamberService;
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(158, 140, 35));
+        jButton2.setBackground(new java.awt.Color(0, 143, 168));
         jButton2.setText("Modifier");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +125,7 @@ private ChamberService chamberService;
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(158, 140, 35));
+        jButton3.setBackground(new java.awt.Color(0, 143, 168));
         jButton3.setText("Supprimer");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +146,7 @@ private ChamberService chamberService;
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(158, 140, 35));
+        jButton4.setBackground(new java.awt.Color(0, 143, 168));
         jButton4.setText("Vider");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +154,7 @@ private ChamberService chamberService;
             }
         });
 
-        RechercheBtnChamber.setBackground(new java.awt.Color(158, 140, 35));
+        RechercheBtnChamber.setBackground(new java.awt.Color(0, 143, 168));
         RechercheBtnChamber.setText("Rechercher ");
         RechercheBtnChamber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +170,7 @@ private ChamberService chamberService;
             }
         });
 
-        AnuulerBtnRecherch.setBackground(new java.awt.Color(158, 140, 35));
+        AnuulerBtnRecherch.setBackground(new java.awt.Color(0, 143, 168));
         AnuulerBtnRecherch.setText("Annuler ");
         AnuulerBtnRecherch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,9 +268,9 @@ private ChamberService chamberService;
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(151, 69, 28));
+        jPanel2.setBackground(new java.awt.Color(0, 67, 78));
 
-        ListChamber.setBackground(new java.awt.Color(231, 215, 150));
+        ListChamber.setBackground(new java.awt.Color(255, 255, 165));
         ListChamber.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}

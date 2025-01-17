@@ -128,11 +128,11 @@ public class ReservationForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ListReservation = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(102, 102, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Gestion de Reservation ");
         setFocusable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 165));
 
         jLabel1.setText("Gestion de Reservation ");
 
@@ -144,7 +144,7 @@ public class ReservationForm extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Client :");
 
-        jButton1.setBackground(new java.awt.Color(158, 140, 35));
+        jButton1.setBackground(new java.awt.Color(0, 143, 168));
         jButton1.setText("Ajouter");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,7 @@ public class ReservationForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(158, 140, 35));
+        jButton2.setBackground(new java.awt.Color(0, 143, 168));
         jButton2.setText("Modifier ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +161,7 @@ public class ReservationForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(158, 140, 35));
+        jButton3.setBackground(new java.awt.Color(0, 143, 168));
         jButton3.setText("Supprimer ");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +181,7 @@ public class ReservationForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(158, 140, 35));
+        jButton4.setBackground(new java.awt.Color(0, 143, 168));
         jButton4.setText("Export Clinet info ");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +197,7 @@ public class ReservationForm extends javax.swing.JInternalFrame {
             }
         });
 
-        RecherchetbtnReservation.setBackground(new java.awt.Color(158, 140, 35));
+        RecherchetbtnReservation.setBackground(new java.awt.Color(0, 143, 168));
         RecherchetbtnReservation.setText("Rechercher ");
         RecherchetbtnReservation.setDoubleBuffered(true);
         RecherchetbtnReservation.setFocusCycleRoot(true);
@@ -208,7 +208,7 @@ public class ReservationForm extends javax.swing.JInternalFrame {
             }
         });
 
-        AnulerbtnRecherche.setBackground(new java.awt.Color(158, 140, 35));
+        AnulerbtnRecherche.setBackground(new java.awt.Color(0, 143, 168));
         AnulerbtnRecherche.setText("Annuler");
         AnulerbtnRecherche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +216,7 @@ public class ReservationForm extends javax.swing.JInternalFrame {
             }
         });
 
-        ExportTableInfo.setBackground(new java.awt.Color(158, 140, 35));
+        ExportTableInfo.setBackground(new java.awt.Color(0, 143, 168));
         ExportTableInfo.setText("Imprimer");
         ExportTableInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,15 +261,15 @@ public class ReservationForm extends javax.swing.JInternalFrame {
                         .addComponent(RecherchetbtnReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AnulerbtnRecherche, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ExportTableInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(ExportTableInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(99, 99, 99))
         );
         jPanel1Layout.setVerticalGroup(
@@ -295,15 +295,16 @@ public class ReservationForm extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))
+                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4))
+                        .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ExportTableInfo)))
+                        .addComponent(ExportTableInfo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -313,13 +314,13 @@ public class ReservationForm extends javax.swing.JInternalFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(151, 69, 28));
+        jPanel2.setBackground(new java.awt.Color(0, 67, 78));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("List des reservation ");
 
-        ListReservation.setBackground(new java.awt.Color(231, 215, 150));
+        ListReservation.setBackground(new java.awt.Color(255, 255, 165));
         ListReservation.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},

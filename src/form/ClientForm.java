@@ -88,11 +88,11 @@ public class ClientForm extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setBackground(new java.awt.Color(102, 102, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
         setTitle("Gestion Clinet ");
         setFocusable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 165));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setForeground(new java.awt.Color(153, 255, 153));
 
@@ -113,7 +113,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Clinet gestion ");
 
-        addclient.setBackground(new java.awt.Color(158, 140, 35));
+        addclient.setBackground(new java.awt.Color(0, 143, 168));
         addclient.setText("Ajouter");
         addclient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +121,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
             }
         });
 
-        deleteclient.setBackground(new java.awt.Color(176, 165, 42));
+        deleteclient.setBackground(new java.awt.Color(0, 143, 168));
         deleteclient.setText("Supprimer");
         deleteclient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +129,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
             }
         });
 
-        updateclient.setBackground(new java.awt.Color(197, 164, 60));
+        updateclient.setBackground(new java.awt.Color(0, 143, 168));
         updateclient.setText("Modifier");
         updateclient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +137,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(158, 140, 35));
+        jButton1.setBackground(new java.awt.Color(0, 143, 168));
         jButton1.setText("Vider");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +153,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
             }
         });
 
-        RechercheBtnClient.setBackground(new java.awt.Color(176, 165, 42));
+        RechercheBtnClient.setBackground(new java.awt.Color(0, 143, 168));
         RechercheBtnClient.setText("Rechercher");
         RechercheBtnClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +161,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
             }
         });
 
-        AnulerLaRecherche.setBackground(new java.awt.Color(176, 165, 42));
+        AnulerLaRecherche.setBackground(new java.awt.Color(0, 143, 168));
         AnulerLaRecherche.setText("Annuler");
         AnulerLaRecherche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,13 +249,13 @@ public class ClientForm extends javax.swing.JInternalFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(151, 69, 28));
+        jPanel2.setBackground(new java.awt.Color(0, 67, 78));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("LIste Des clients ");
 
-        listeclient.setBackground(new java.awt.Color(231, 215, 150));
+        listeclient.setBackground(new java.awt.Color(255, 255, 165));
         listeclient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
