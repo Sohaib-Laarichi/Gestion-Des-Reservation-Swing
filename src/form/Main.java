@@ -5,6 +5,10 @@
 package form;
 
 import form.*;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 /**
  *
  * @author Dark
@@ -30,6 +34,12 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        Client = new javax.swing.JButton();
+        Reservation = new javax.swing.JButton();
+        Chamber = new javax.swing.JButton();
+        Categorie = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -41,11 +51,93 @@ public class Main extends javax.swing.JFrame {
         copyMenuItem = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(51, 102, 0));
+
+        Client.setBackground(new java.awt.Color(198, 157, 69));
+        Client.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Client.setText("Client");
+        Client.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClientActionPerformed(evt);
+            }
+        });
+
+        Reservation.setBackground(new java.awt.Color(198, 157, 69));
+        Reservation.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Reservation.setText("Reservation");
+        Reservation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReservationActionPerformed(evt);
+            }
+        });
+
+        Chamber.setBackground(new java.awt.Color(198, 157, 69));
+        Chamber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Chamber.setText("Chamber");
+        Chamber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChamberActionPerformed(evt);
+            }
+        });
+
+        Categorie.setBackground(new java.awt.Color(198, 157, 69));
+        Categorie.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Categorie.setText("Categorie");
+        Categorie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CategorieActionPerformed(evt);
+            }
+        });
+
+        Logout.setBackground(new java.awt.Color(198, 157, 69));
+        Logout.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Logout.setText("Logout");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Client, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Chamber, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Categorie, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Reservation)
+                    .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(Client, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(Reservation, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(Chamber, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(Categorie, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
+        );
+
+        menuBar.setToolTipText("");
+        menuBar.setBorderPainted(false);
+        menuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        menuBar.setEnabled(false);
+        menuBar.setFocusable(false);
+        menuBar.setRequestFocusEnabled(false);
+        menuBar.setVerifyInputWhenFocusTarget(false);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Gestion");
@@ -129,42 +221,46 @@ public class Main extends javax.swing.JFrame {
 
         menuBar.add(editMenu);
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1305, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void switchForm(javax.swing.JInternalFrame newForm) {
-        // Fermer le formulaire actuel s'il existe
-        for (javax.swing.JInternalFrame frame : desktopPane.getAllFrames()) {
-            frame.dispose(); // Fermer tous les formulaires ouverts
-        }
-          // Ajouter et afficher le nouveau formulaire
-        desktopPane.add(newForm);
-        newForm.setVisible(true);
+         // Fermer tous les formulaires ouverts dans le JDesktopPane
+    for (javax.swing.JInternalFrame frame : desktopPane.getAllFrames()) {
+        frame.dispose(); // Fermer chaque formulaire
+    }
+
+    // Ajouter et afficher le nouveau formulaire
+    desktopPane.add(newForm);
+    newForm.setVisible(true);
+
+    // Centrer le nouveau formulaire dans le JDesktopPane
+    newForm.setLocation(
+        (desktopPane.getWidth() - newForm.getWidth()) / 2,
+        (desktopPane.getHeight() - newForm.getHeight()) / 2
+    );
     }
         
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
@@ -208,44 +304,63 @@ public class Main extends javax.swing.JFrame {
         switchForm(rc); // Basculer vers le formulaire Recherche Chambre
     }//GEN-LAST:event_pasteMenuItemActionPerformed
 
+    private void ClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientActionPerformed
+        // TODO add your handling code here:
+          ClientForm clientFrame = new ClientForm();
+        switchForm(clientFrame); // Basculer vers le formulaire Client
+    }//GEN-LAST:event_ClientActionPerformed
+
+    private void ReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservationActionPerformed
+        // TODO add your handling code here:
+        ReservationForm rf = new ReservationForm();
+        switchForm(rf);
+    }//GEN-LAST:event_ReservationActionPerformed
+
+    private void ChamberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChamberActionPerformed
+        // TODO add your handling code here:
+          ChambreForm cf = new ChambreForm();
+        switchForm(cf);
+    }//GEN-LAST:event_ChamberActionPerformed
+
+    private void CategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategorieActionPerformed
+        // TODO add your handling code here:
+        CatgoriForm cgf = new CatgoriForm();
+        switchForm(cgf);
+    }//GEN-LAST:event_CategorieActionPerformed
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // TODO add your handling code here:
+          // Fermer la fenêtre principale
+    this.dispose();
+
+    // Afficher le formulaire d'authentification
+    Authentification authForm = new Authentification();
+    authForm.setVisible(true);
+    }//GEN-LAST:event_LogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+       // Afficher le formulaire d'authentification en premier
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                // Créer et afficher le formulaire d'authentification
+                Authentification authForm = new Authentification();
+                authForm.setVisible(true);
+
+                // Attendre que l'authentification réussisse
+                // (Ceci est géré dans la classe Authentification)
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentMenuItem;
+    private javax.swing.JButton Categorie;
+    private javax.swing.JButton Chamber;
+    private javax.swing.JButton Client;
+    private javax.swing.JButton Logout;
+    private javax.swing.JButton Reservation;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
@@ -253,7 +368,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;

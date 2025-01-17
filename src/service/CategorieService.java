@@ -87,26 +87,22 @@ public class CategorieService implements IDAO<Categorie> {
 
     @Override
     public Categorie findById(int id) {
-        String req = "SELECT * FROM Categorie WHERE id = ?";
-        try {
-            PreparedStatement ps = Connexion.getConnection().prepareStatement(req);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Categorie categorie = new Categorie(
-                    rs.getString("libelle"),
-                    rs.getString("code")
-                );
-               // JOptionPane.showMessageDialog(null, "Catégorie trouvée :\nID: " + id + "\nLibelle: " + categorie.getLibelle() + "\nCode: " + categorie.getCode(), "Succès", JOptionPane.INFORMATION_MESSAGE);
-                return categorie;
-            } else {
-                //JOptionPane.showMessageDialog(null, "Aucune catégorie trouvée avec l'ID: " + id, "Information", JOptionPane.WARNING_MESSAGE);
-            }
-        } catch (SQLException e) {
-            //JOptionPane.showMessageDialog(null, "Erreur lors de la recherche de la catégorie", "Erreur", JOptionPane.ERROR_MESSAGE);
+    String req = "SELECT * FROM Categorie WHERE id = ?";
+    try (PreparedStatement ps = Connexion.getConnection().prepareStatement(req)) {
+        ps.setInt(1, id); // Utiliser l'ID fourni en paramètre
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Categorie(
+                rs.getInt("id"),         // Récupérer l'ID de la base de données
+                rs.getString("code"),    // Récupérer le code
+                rs.getString("libelle")  // Récupérer le libellé
+            );
         }
-        return null;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return null; // Retourne null si aucune catégorie n'est trouvée
+}
     public int findIdByLibelle(String libelle) {
     String req = "SELECT id FROM Categorie WHERE libelle = ?";
     try {

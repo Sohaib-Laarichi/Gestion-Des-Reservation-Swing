@@ -59,6 +59,10 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        RecherchtxtCategorie = new javax.swing.JTextField();
+        Recherbtn = new javax.swing.JButton();
+        Annulerbtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listCategorie = new javax.swing.JTable();
@@ -79,9 +83,11 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setClosable(true);
+        setBackground(new java.awt.Color(102, 102, 0));
         setTitle("Gestion Gategorie ");
         setToolTipText("");
+        setFocusable(false);
+        setPreferredSize(new java.awt.Dimension(1310, 700));
         setVisible(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 153));
@@ -126,24 +132,61 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setText("Recherche :");
+
+        RecherchtxtCategorie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecherchtxtCategorieActionPerformed(evt);
+            }
+        });
+
+        Recherbtn.setBackground(new java.awt.Color(158, 140, 35));
+        Recherbtn.setText("Rechercher");
+        Recherbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecherbtnActionPerformed(evt);
+            }
+        });
+
+        Annulerbtn.setBackground(new java.awt.Color(158, 140, 35));
+        Annulerbtn.setText("Annuler");
+        Annulerbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnnulerbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(69, 69, 69))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(39, 39, 39)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(categorieCode)
-                    .addComponent(categorieLibelle, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(69, 69, 69))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGap(39, 39, 39))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel6)
+                        .addGap(30, 30, 30)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(RecherchtxtCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Recherbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Annulerbtn))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(categorieCode)
+                        .addComponent(categorieLibelle, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -164,15 +207,21 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(categorieLibelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton2))
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(RecherchtxtCategorie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Recherbtn)
+                        .addComponent(Annulerbtn))
+                    .addComponent(jButton3))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -203,20 +252,22 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -239,6 +290,8 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleName("Gestion Categorie ");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -313,7 +366,57 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
     categorieLibelle.setText(""); // Vide le champ "Libellé"
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void RecherbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecherbtnActionPerformed
+         // Récupérer l'ID saisi dans le champ de recherche
+    String idText = RecherchtxtCategorie.getText().trim();
+
+    // Vérifier si le champ est vide
+    if (idText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Veuillez entrer un ID pour rechercher une catégorie.", "Erreur", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        // Convertir l'ID en entier
+        int id = Integer.parseInt(idText);
+
+        // Rechercher la catégorie par ID
+        Categorie categorie = cs.findById(id);
+
+        // Vérifier si la catégorie existe
+        if (categorie == null) {
+            JOptionPane.showMessageDialog(this, "Aucune catégorie trouvée avec l'ID : " + id, "Information", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Afficher les détails de la catégorie dans le tableau
+        model.setRowCount(0); // Vider le tableau
+        model.addRow(new Object[]{
+            categorie.getId(),
+            categorie.getCode(),
+            categorie.getLibelle()
+        });
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "L'ID doit être un nombre entier.", "Erreur", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erreur lors de la recherche de la catégorie : " + e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_RecherbtnActionPerformed
+
+    private void AnnulerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnnulerbtnActionPerformed
+        RecherchtxtCategorie.setText(""); // Vide le champ de recherche
+        load(); 
+    }//GEN-LAST:event_AnnulerbtnActionPerformed
+
+    private void RecherchtxtCategorieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecherchtxtCategorieActionPerformed
+        RecherbtnActionPerformed(evt);
+    }//GEN-LAST:event_RecherchtxtCategorieActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Annulerbtn;
+    private javax.swing.JButton Recherbtn;
+    private javax.swing.JTextField RecherchtxtCategorie;
     private javax.swing.JTextField categorieCode;
     private javax.swing.JTextField categorieLibelle;
     private javax.swing.JButton jButton1;
@@ -325,6 +428,7 @@ public class CatgoriForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
