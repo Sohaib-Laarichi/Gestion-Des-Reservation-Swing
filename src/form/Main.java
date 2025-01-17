@@ -20,6 +20,11 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+         openClientForm();
+    }
+     private void openClientForm() {
+        ClientForm clientForm = new ClientForm();
+        switchForm(clientForm); // Utiliser la méthode switchForm pour afficher le formulaire
     }
     
 
