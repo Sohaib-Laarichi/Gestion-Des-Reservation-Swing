@@ -115,11 +115,11 @@
                                       <Component id="emailtxt" alignment="0" min="-2" pref="928" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="updateclient" min="-2" pref="85" max="-2" attributes="0"/>
-                                      <Component id="addclient" min="-2" pref="85" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" pref="85" max="-2" attributes="0"/>
-                                      <Component id="deleteclient" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="addclient" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="updateclient" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="deleteclient" alignment="0" pref="97" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="teletxt" alignment="0" min="-2" pref="928" max="-2" attributes="0"/>
@@ -186,7 +186,7 @@
                           <Component id="AnulerLaRecherche" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -228,7 +228,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Clinet gestion "/>
+            <Property name="text" type="java.lang.String" value="Gestion des clients"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="addclient">
@@ -352,7 +352,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="LIste Des clients "/>
+            <Property name="text" type="java.lang.String" value="Liste des clients "/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">

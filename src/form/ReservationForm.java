@@ -22,13 +22,11 @@ import service.ReservationService;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.MessageFormat;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 /**

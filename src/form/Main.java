@@ -21,6 +21,8 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
          openClientForm();
+         this.setLocationRelativeTo(null);
+         this.setResizable(false);
     }
      private void openClientForm() {
         ClientForm clientForm = new ClientForm();
